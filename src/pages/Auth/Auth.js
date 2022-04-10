@@ -23,7 +23,7 @@ const Auth = () => {
       case "register":
         return <RegisterForm />;
       default:
-        return <AuthOptions />
+        return <AuthOptions setSelectedForm={setSelectedForm}/>
     }
   }
 
