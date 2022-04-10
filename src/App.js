@@ -9,6 +9,7 @@ export const App = () => {
 
   // Verificar si el usuario esta LOGUEADO
   const auth = getAuth();
+
   onAuthStateChanged(auth, (currentUser) => {
     if(!currentUser) {
       setUser(null);
