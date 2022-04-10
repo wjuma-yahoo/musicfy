@@ -1,0 +1,37 @@
+@import "../../../scss/index.scss";
+
+.register-form {
+  margin-top: 50px;
+
+  h1 {
+    color: $font-light;
+    text-align: center;
+    font-size: 35px;
+    padding-bottom: 20px;
+  }
+
+  .ui.form {
+    .field {
+      .input {
+        margin-bottom: 5px;
+
+        input {
+          background-color: $background-gray;
+          border: 0;
+          font-size: $defaultFontSize;
+          color: $font-light;
+
+          &:hover,
+          &:active,
+          &:focus {
+            background-color: $background-gray-hover;
+          }
+        }
+      }
+      i {
+        color: $font-light;
+        font-size: 19px;
+      }
+    }
+  }
+}

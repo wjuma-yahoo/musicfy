@@ -19,11 +19,11 @@ const Auth = () => {
   const handlerForm = () => {
     switch (selectedForm) {
       case "login":
-        return <LoginForm />;
+        return <LoginForm setSelectedForm={setSelectedForm} />;
       case "register":
-        return <RegisterForm />;
+        return <RegisterForm setSelectedForm={setSelectedForm} />;
       default:
-        return <AuthOptions setSelectedForm={setSelectedForm}/>
+        return <AuthOptions setSelectedForm={setSelectedForm} />
     }
   }
 
