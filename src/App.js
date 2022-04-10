@@ -1,6 +1,25 @@
 import React, { useState } from 'react';
+
+// Componentes
+import Auth from './pages/Auth';
+
+// Libraries
+import styled from '@emotion/styled';
+import { Button, Container } from 'semantic-ui-react';
+
+// Firebase
 import firebase from './utils/Firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+const auth = getAuth();
+
+// Variables
+const UserLoggedStyles = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+`;
 
 export const App = () => {
 
@@ -8,8 +27,6 @@ export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Verificar si el usuario esta LOGUEADO
-  const auth = getAuth();
-
   onAuthStateChanged(auth, (currentUser) => {
     if(!currentUser) {
       setUser(null);
@@ -23,7 +40,20 @@ export const App = () => {
     return null;
   }
 
+  return (!user) ? <Auth /> : <UserLogged />
+
+}
+
+const UserLogged = () => {
+
+  const logout = () => {
+    signOut();
+  }
+
   return (
-    !user ? 'Usuario no logueado' : 'Usuario logueado'
-  );
+    <UserLoggedStyles>
+      <h1>Usuario logueado</h1>
+      <Button onClick={logout}>Cerrar session</Button>
+    </UserLoggedStyles>
+  )
 }
