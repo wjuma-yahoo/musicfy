@@ -1,16 +1,28 @@
-import React from 'react';
-import Firebase from './utils/Firebase';
-import 'firebase/auth';
+import React, { useState } from 'react';
+import firebase from './utils/Firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export const App = () => {
 
-  Firebase.auth().onAuthStateChanged(currentUser => {
-    console.log( currentUser ? 'Esta autenticado' : 'No esta autenticado' );
-  })
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Verificar si el usuario esta LOGUEADO
+  const auth = getAuth();
+  onAuthStateChanged(auth, (currentUser) => {
+    if(!currentUser) {
+      setUser(null);
+    } else {
+      setUser(currentUser);
+    }
+    setIsLoading(false);
+  });
+
+  if(isLoading) {
+    return null;
+  }
 
   return (
-    <div className="App">
-      Hola mundo
-    </div>
+    !user ? 'Usuario no logueado' : 'Usuario logueado'
   );
 }
